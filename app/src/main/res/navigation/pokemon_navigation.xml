@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pokemon_navigation"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.grando.pokemonapp.presentation.views.fragments.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_pokemonListFragment"
+            app:destination="@id/pokemonListFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonListFragment"
+        android:name="com.grando.pokemonapp.presentation.views.fragments.PokemonListFragment"
+        android:label="fragment_pokemon_list"
+        tools:layout="@layout/fragment_pokemon_list">
+        <action
+            android:id="@+id/action_pokemonListFragment_to_pokemonDetailFragment"
+            app:destination="@id/pokemonDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonDetailFragment"
+        android:name="com.grando.pokemonapp.presentation.views.fragments.PokemonDetailFragment"
+        android:label="fragment_pokemon_detail"
+        tools:layout="@layout/fragment_pokemon_detail">
+        <argument
+            android:name="pokemon"
+            app:argType="com.grando.pokemonapp.domain.Pokemon" />
+    </fragment>
+</navigation>

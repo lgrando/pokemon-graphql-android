@@ -1,0 +1,45 @@
+query GetPokemons($first: Int!) {
+  pokemons(first: $first) {
+    ...PokemonModel
+  }
+}
+
+query GetPokemon($pokemonName: String!) {
+  pokemon(name: $pokemonName) {
+    ...PokemonModel
+  }
+}
+
+fragment PokemonModel on Pokemon {
+  id
+  number
+  name
+  image
+  weight {
+    minimum
+    maximum
+  }
+  height {
+    minimum
+    maximum
+  }
+  types
+  attacks {
+    fast {
+      name
+      type
+      damage
+    }
+    special {
+      name
+      type
+      damage
+    }
+  }
+  evolutions {
+    id
+    number
+    name
+    image
+  }
+}

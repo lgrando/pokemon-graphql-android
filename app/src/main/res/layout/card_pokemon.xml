@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.grando.pokemonapp.presentation.utils.extensions.PokemonExtensionsKt" />
+
+        <variable
+            name="pokemon"
+            type="com.grando.pokemonapp.domain.Pokemon" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/ivImage"
+            imageFromUrl="@{pokemon.image}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@id/tvName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/ivCatched"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_dimen"
+            android:src="@drawable/ic_pokeball"
+            android:visibility="@{pokemon.isCatched ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="@id/ivImage"
+            app:layout_constraintTop_toTopOf="@id/ivImage"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@{PokemonExtensionsKt.formatName(pokemon)}"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="#000 Pokemon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

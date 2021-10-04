@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Pokemon App</string>
+    <string name="image_logo">imageLogo</string>
+    <string name="image_transition_name">imageTransition</string>
+    <string name="search">Search</string>
+    <string name="no_pokemon_found_label">No Pokemon found</string>
+    <string name="weight_label">Weight</string>
+    <string name="height_label">Height</string>
+    <string name="types_label">Type</string>
+    <string name="fast_attacks_label">Fast attacks</string>
+    <string name="special_attacks_label">Special attacks</string>
+    <string name="evolution_label">Evolutionary Chain</string>
+    <string name="catch_pokemon_label">Catch this pokemon!</string>
+    <string name="gotcha_label">Gotcha!</string>
+</resources>

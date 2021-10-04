@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.grando.pokemonapp.presentation.utils.extensions.PokemonExtensionsKt" />
+
+        <variable
+            name="pokemon"
+            type="com.grando.pokemonapp.domain.Pokemon" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/vTypeBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha=".20"
+            backgroundByType="@{pokemon.types}"
+            tools:background="#78c850" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:fitsSystemWindows="false"
+            app:layout_constraintBottom_toTopOf="@id/btnCatch"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvPokemon"
+                    android:layout_width="0dp"
+                    android:layout_height="230dp"
+                    android:layout_marginStart="@dimen/default_dimen"
+                    android:layout_marginTop="@dimen/default_dimen"
+                    android:transitionName="@string/image_transition_name"
+                    app:cardCornerRadius="@dimen/default_dimen"
+                    app:cardElevation="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent=".44">
+
+                    <include
+                        layout="@layout/card_pokemon"
+                        app:pokemon="@{pokemon}" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/tvWeightLabel"
+                    style="@style/TitleStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/default_dimen"
+                    android:layout_marginEnd="@dimen/default_dimen"
+                    android:text="@string/weight_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cvPokemon"
+                    app:layout_constraintTop_toTopOf="@id/cvPokemon" />
+
+                <TextView
+                    android:id="@+id/tvWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/default_dimen"
+                    android:text="@{PokemonExtensionsKt.formatWeight(pokemon)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tvWeightLabel"
+                    app:layout_constraintTop_toBottomOf="@id/tvWeightLabel"
+                    tools:text="Min: 0 Max: 0" />
+
+                <TextView
+                    android:id="@+id/tvHeightLabel"
+                    style="@style/TitleStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_dimen"
+                    android:layout_marginEnd="@dimen/default_dimen"
+                    android:text="@string/height_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tvWeightLabel"
+                    app:layout_constraintTop_toBottomOf="@id/tvWeight" />
+
+                <TextView
+                    android:id="@+id/tvHeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/default_dimen"
+                    android:text="@{PokemonExtensionsKt.formatHeight(pokemon)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tvHeightLabel"
+                    app:layout_constraintTop_toBottomOf="@id/tvHeightLabel"
+                    tools:text="Min: 0 Max: 0" />
+
+                <TextView
+                    android:id="@+id/tvTypesLabel"
+                    style="@style/TitleStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_dimen"
+                    android:layout_marginEnd="@dimen/default_dimen"
+                    android:text="@string/types_label"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tvHeight"
+                    app:layout_constraintTop_toBottomOf="@id/tvHeight" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTypes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_dimen"
+                    android:layout_marginEnd="@dimen/default_dimen"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tvTypesLabel"
+                    app:layout_constraintTop_toBottomOf="@id/tvTypesLabel"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_type" />
+
+                <TextView
+                    android:id="@+id/tvFastAttacksLabel"
+                    style="@style/TitleStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_dimen"
+                    android:text="@string/fast_attacks_label"
+                    app:layout_constraintStart_toStartOf="@id/cvPokemon"
+                    app:layout_constraintTop_toBottomOf="@id/cvPokemon" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvFastAttacks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_dimen"
+                    android:paddingStart="@dimen/default_dimen"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvFastAttacksLabel"
+                    app:spanCount="2"
+                    tools:ignore="RtlSymmetry"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_move" />
+
+                <TextView
+                    android:id="@+id/tvSpecialAttacksLabel"
+                    style="@style/TitleStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/special_attacks_label"
+                    app:layout_constraintStart_toStartOf="@id/tvFastAttacksLabel"
+                    app:layout_constraintTop_toBottomOf="@id/rvFastAttacks" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSpecialAttacks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_dimen"
+                    android:paddingStart="@dimen/default_dimen"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvSpecialAttacksLabel"
+                    app:spanCount="2"
+                    tools:ignore="RtlSymmetry"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_move" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clEvolution"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/rvSpecialAttacks">
+
+                    <TextView
+                        android:id="@+id/tvEvolutionsLabel"
+                        style="@style/TitleStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_dimen"
+                        android:text="@string/evolution_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvEvolutions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="vertical"
+                        android:paddingStart="@dimen/default_dimen"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvEvolutionsLabel"
+                        tools:ignore="RtlSymmetry"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/item_evolution" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/btnCatch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_dimen"
+            android:layout_marginBottom="@dimen/default_dimen"
+            android:text="@string/catch_pokemon_label"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scroll"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

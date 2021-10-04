@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.grando.pokemonapp.presentation.utils.extensions.PokemonExtensionsKt" />
+
+        <variable
+            name="item"
+            type="com.grando.pokemonapp.domain.Pokemon" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/vTopLine"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/dark_gray"
+            app:layout_constraintBottom_toTopOf="@id/cvImage"
+            app:layout_constraintEnd_toEndOf="@id/cvImage"
+            app:layout_constraintStart_toStartOf="@id/cvImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/vBottomLine"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:background="@color/dark_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/cvImage"
+            app:layout_constraintStart_toStartOf="@id/cvImage"
+            app:layout_constraintTop_toBottomOf="@id/cvImage" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvImage"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/default_dimen"
+            app:cardCornerRadius="@dimen/small_dimen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                imageFromUrl="@{item.image}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/avatars" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/TitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_dimen"
+            android:text="@{PokemonExtensionsKt.formatName(item)}"
+            app:layout_constraintBottom_toBottomOf="@id/cvImage"
+            app:layout_constraintStart_toEndOf="@id/cvImage"
+            app:layout_constraintTop_toTopOf="@id/cvImage"
+            tools:text="#000 Pokemon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
